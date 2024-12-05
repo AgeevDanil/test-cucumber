@@ -15,6 +15,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -36,6 +37,11 @@
             <artifactId>h2</artifactId>
             <version>2.1.212</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>2.20.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -45,8 +51,18 @@
                 <version>3.0.0</version>
                 <configuration>
                     <includes>
-                        <include>**/runner/*.java</include>
+                        <include>**/CucumberTestRunner.java</include>
                     </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
+                <configuration>
+                    <reportVersion>2.20.1</reportVersion>
+                    <reportDirectory>${project.build.directory}/reports/allure-reports</reportDirectory>
+                    <resultsDirectory>${project.build.directory}/reports/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
         </plugins>

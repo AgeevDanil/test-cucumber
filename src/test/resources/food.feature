@@ -11,7 +11,7 @@ Feature: Food Management
     And the database should contain the item "Кабачок" with type "VEGETABLE" and exotic "false"
 
   @all
-  Scenario: Add an exotic fruit
+  Scenario: Добавление нового фрукта
     Given I navigate to the food page
     When I click the "Add" button
     And I enter the name "Папая"
@@ -22,7 +22,7 @@ Feature: Food Management
     And the database should contain the item "Папая" with type "FRUIT" and exotic "true"
 
   @all
-  Scenario: Prevent duplicate entries
+  Scenario: Проверка на добавление дубликата
     Given I navigate to the food page
     When I click the "Add" button
     And I enter the name "Капуста"
@@ -32,5 +32,5 @@ Feature: Food Management
     And the database should not contain a single entry for "Капуста" with type "VEGETABLE"
 
   @all
-  Scenario: Clean up after test
+  Scenario: Приведение в прежний вид
     Given I clean up unwanted food items
