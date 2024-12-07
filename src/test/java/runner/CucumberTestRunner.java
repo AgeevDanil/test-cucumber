@@ -3,18 +3,17 @@ package runner;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources", // Относительный путь к папке с feature-файлами
-        glue = "steps",                  // Пакет с реализациями шагов
+        features = "src/test/resources",
+        glue = "steps",
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports.html",
-                "json:target/cucumber.json"
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
-        monochrome = true,                        // Читабельный вывод в консоль
-        tags = "@all"                             // Тег для выполнения определенных сценариев
+        monochrome = true,
+        tags = "@all"
 )
 public class CucumberTestRunner {
 }
+
