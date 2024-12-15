@@ -6,10 +6,16 @@ import io.cucumber.java.en.*;
 import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import pages.FoodPage;
 import utils.TestSql;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 
 @Epic("Тестирование управления продуктами")
 @Feature("Управление продуктами на странице")
@@ -20,9 +26,15 @@ public class StepDefinitions {
 
     @Before
     @Step("Подготовка тестового окружения")
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        driver = new ChromeDriver();
+    public void setup() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setVersion("108.0");
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of("enableVNC", true,
+                "enableVideo", true
+        ));
+        RemoteWebDriver driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://qualit.applineselenoid.fvds.ru/");

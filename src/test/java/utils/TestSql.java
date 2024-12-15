@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotEquals;
 
 
 public class TestSql {
-    private static final String JDBC_URL = "jdbc:h2:tcp://localhost:9092/mem:testdb";
+    private static final String JDBC_URL = "jdbc:h2:tcp://qualit.applineselenoid.fvds.ru/mem:testdb";
     private static final String USER = "user";
     private static final String PASSWORD = "pass";
 
