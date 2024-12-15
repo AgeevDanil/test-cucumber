@@ -26,14 +26,20 @@ public class StepDefinitions {
     @Before
     @Step("Подготовка тестового окружения")
     public void setup() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("108.0");
-        capabilities.setCapability("selenoid:options", Map.of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
+        String useSelenoid = System.getProperty("useSelenoid", "false");
+        if ("true".equalsIgnoreCase(useSelenoid)) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName("chrome");
+            capabilities.setVersion("108.0");
+            capabilities.setCapability("selenoid:options", Map.of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
+        } else{
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+            driver = new ChromeDriver();
+        }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://qualit.applineselenoid.fvds.ru/food");
