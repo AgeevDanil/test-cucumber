@@ -87,8 +87,9 @@
                 <version>2.15.2</version>
                 <configuration>
                     <reportVersion>2.21.0</reportVersion>
+                    <resultsDirectory>${project.build.directory}/reports/allure-results</resultsDirectory>
                     <reportDirectory>${project.build.directory}/reports/allure-reports</reportDirectory>
-                    <resultsDirectory>/Users/ageev/Downloads/steps/allure-results</resultsDirectory>
+
                 </configuration>
                 <executions>
                     <execution>
@@ -113,6 +114,10 @@
                     <includes>
                         <include>**/CucumberTestRunner.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
+                        <allure.report.directory>${project.build.directory}/reports/allure-reports</allure.report.directory>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
