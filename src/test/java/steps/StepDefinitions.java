@@ -16,7 +16,6 @@ import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
 @Epic("Тестирование управления продуктами")
 @Feature("Управление продуктами на странице")
 public class StepDefinitions {
@@ -30,10 +29,11 @@ public class StepDefinitions {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
         capabilities.setVersion("108.0");
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of("enableVNC", true,
+        capabilities.setCapability("selenoid:options", Map.of(
+                "enableVNC", true,
                 "enableVideo", true
         ));
-        RemoteWebDriver driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
+        driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -51,7 +51,7 @@ public class StepDefinitions {
     @When("I click the {string} button")
     @Step("Нажатие кнопки '{buttonName}'")
     public void iClickTheButton(String buttonName) {
-        if (buttonName.equals("Add")) {
+        if ("Add".equals(buttonName)) {
             foodPage.ClickAdd();
         }
     }
@@ -114,6 +114,8 @@ public class StepDefinitions {
     @After
     @Step("Завершение тестового окружения")
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
