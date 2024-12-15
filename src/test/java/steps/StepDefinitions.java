@@ -21,11 +21,11 @@ public class StepDefinitions {
     @Before
     @Step("Подготовка тестового окружения")
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "/Users/ageev/Downloads/first-web-test/src/test/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://localhost:8080/food");
+        driver.get("https://qualit.applineselenoid.fvds.ru/");
         foodPage = new FoodPage(driver);
         testSql = new TestSql();
     }
