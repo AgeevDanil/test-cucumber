@@ -34,10 +34,9 @@ public class StepDefinitions {
                 "enableVideo", true
         ));
         driver = new RemoteWebDriver(URI.create("http://jenkins.applineselenoid.fvds.ru:4444/wd/hub/").toURL(), capabilities);
-
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://qualit.applineselenoid.fvds.ru/");
+        driver.get("https://qualit.applineselenoid.fvds.ru/food");
         foodPage = new FoodPage(driver);
         testSql = new TestSql();
     }
@@ -45,7 +44,7 @@ public class StepDefinitions {
     @Given("I navigate to the food page")
     @Step("Переход на страницу с продуктами")
     public void iNavigateToTheFoodPage() {
-        driver.get("http://localhost:8080/food");
+        driver.get("https://qualit.applineselenoid.fvds.ru/food");
     }
 
     @When("I click the {string} button")
